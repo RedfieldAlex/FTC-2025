@@ -64,12 +64,12 @@ public final class MecanumDrive {
 
         // drive model parameters
         public double inPerTick = 0.0019647;
-        public double lateralInPerTick = inPerTick;
-        public double trackWidthTicks = 0;
+        public double lateralInPerTick = 0.0013471231138105387;
+        public double trackWidthTicks = 7162.418495342322;
 
         // feedforward parameters (in tick units)
-        public double kS = 0;
-        public double kV = 0;
+        public double kS = 1.326242916918376;
+        public double kV = 0.000273666375173515;
         public double kA = 0;
 
         // path profile parameters (in inches)
@@ -225,7 +225,7 @@ public final class MecanumDrive {
 
         // TODO: make sure your config has motors with these names (or change them)
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
-        leftFront = hardwareMap.get(DcMotorEx.class, "Front_Right");
+        leftFront = hardwareMap.get(DcMotorEx.class, "Front_Left");
         leftBack = hardwareMap.get(DcMotorEx.class, "Back_Left");
         rightBack = hardwareMap.get(DcMotorEx.class, "Back_Right");
         rightFront = hardwareMap.get(DcMotorEx.class, "Front_Right");
@@ -452,14 +452,14 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         PoseVelocity2d vel = localizer.update();
         poseHistory.add(localizer.getPose());
-        
+
         while (poseHistory.size() > 100) {
             poseHistory.removeFirst();
         }
 
         estimatedPoseWriter.write(new PoseMessage(localizer.getPose()));
-        
-        
+
+
         return vel;
     }
 

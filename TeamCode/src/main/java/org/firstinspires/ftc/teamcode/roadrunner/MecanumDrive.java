@@ -55,7 +55,7 @@ import java.util.List;
 public final class MecanumDrive {
     public static class Params {
         // IMU orientation
-        // TODO: fill in these values based on
+        // TODO: fill in these values based on [DONE]
         //   see https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html?highlight=imu#physical-hub-mounting
         public RevHubOrientationOnRobot.LogoFacingDirection logoFacingDirection =
                 RevHubOrientationOnRobot.LogoFacingDirection.UP;
@@ -83,7 +83,7 @@ public final class MecanumDrive {
 
         // path controller gains
         public double axialGain = 0.0;
-        public double lateralGain = 2; // NEED TO DOUBLE CHECK
+        public double lateralGain = 2.0; // NEED TO DOUBLE CHECK
         public double headingGain = 0.0; // shared with turn
 
         public double axialVelGain = 0.0;
@@ -223,7 +223,7 @@ public final class MecanumDrive {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        // TODO: make sure your config has motors with these names (or change them)
+        // TODO: make sure your config has motors with these names (or change them) [DONE]
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
         leftFront = hardwareMap.get(DcMotorEx.class, "Front_Left");
         leftBack = hardwareMap.get(DcMotorEx.class, "Back_Left");

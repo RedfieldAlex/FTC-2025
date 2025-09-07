@@ -7,7 +7,6 @@ import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-
 public class RobotContainer {
 
     private final Arm arm;
@@ -19,18 +18,15 @@ public class RobotContainer {
 
     }
 
-    public void controllerMapping(Gamepad gamepad1) {
-
-        if (gamepad1.x) {
+    public void armFunc(Gamepad gamepad2) {
+        if (gamepad2.x) {
             Actions.runBlocking(arm.armPos1000());
-        } else if (gamepad1.b) {
+        } else if (gamepad2.b) {
             Actions.runBlocking(arm.armPos2000());
         }
-
     }
 
     public void driving(Gamepad gamepad1) {
-
         // If you press the A button, then you reset the Yaw to be zero from the way the robot is currently pointing
         if (gamepad1.a) {
             drivetrain.resetYaw();
@@ -42,7 +38,6 @@ public class RobotContainer {
         } else {
             drivetrain.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         }
-
     }
 
 }

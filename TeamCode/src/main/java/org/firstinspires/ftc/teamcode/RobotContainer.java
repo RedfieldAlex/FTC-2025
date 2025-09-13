@@ -19,7 +19,7 @@ public class RobotContainer {
 
     }
 
-    public void controllerMapping(Gamepad gamepad1) {
+    public void armFunc(Gamepad gamepad1) {
 
         if (gamepad1.x) {
             Actions.runBlocking(arm.armPos1000());

@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -12,10 +13,12 @@ public class RobotContainer {
 
     private final Arm arm;
     private final Drivetrain drivetrain;
+    private final Shooter shooter;
 
     public RobotContainer(HardwareMap hardwareMap) {
         arm = new Arm(hardwareMap);
         drivetrain = new Drivetrain(hardwareMap);
+        shooter = new Shooter(hardwareMap);
 
     }
 
@@ -42,6 +45,15 @@ public class RobotContainer {
         } else {
             drivetrain.driveFieldRelative(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
         }
+
+    }
+
+    public void shooterFunc(Gamepad gamepad2) {
+
+        if (gamepad2.a) {
+            Actions.runBlocking(shooter.fireArtifact());
+        }
+
 
     }
 

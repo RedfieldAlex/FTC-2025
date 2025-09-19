@@ -5,7 +5,6 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -23,18 +22,29 @@ public class Shooter {
         rightShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public Action fireArtifact() {
-        return new FireArtifact();
+    public void fireArtifactTeleop() {
+        leftShooter.setPower(1.0);
+        rightShooter.setPower(1.0);
     }
 
-    public class FireArtifact implements Action {
+    public void stopFireArtifact() {
+        leftShooter.setPower(0);
+        rightShooter.setPower(0);
+    }
+
+    public Action fireArtifactAuto() {
+        return new FireArtifactAuto();
+    }
+
+    public class FireArtifactAuto implements Action {
 
         private boolean initialized = false;
-        private ElapsedTime runtime = new ElapsedTime();
-        private final double SHOOT_TIME = 3.0;
+        public ElapsedTime runtime = new ElapsedTime();
+        public final double SHOOT_TIME = 3.0;
 
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
+
             if (!initialized) {
                 leftShooter.setPower(0.8);
                 rightShooter.setPower(0.8);
@@ -48,7 +58,7 @@ public class Shooter {
             packet.put("Left Shooter Power", leftShooterPower);
             packet.put("Right Shooter Power", rightShooterPower);
 
-            if () {
+            if (runtime.seconds() < SHOOT_TIME) {
                 return true;
             } else {
                 leftShooter.setPower(0);

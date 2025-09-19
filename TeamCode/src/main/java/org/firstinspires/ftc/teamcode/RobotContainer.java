@@ -22,17 +22,17 @@ public class RobotContainer {
 
     }
 
-    public void armFunc(Gamepad gamepad1) {
+    public void armFunc(Gamepad gamepad2) {
 
-        if (gamepad1.x) {
+        if (gamepad2.x) {
             Actions.runBlocking(arm.armPos1000());
-        } else if (gamepad1.b) {
+        } else if (gamepad2.b) {
             Actions.runBlocking(arm.armPos2000());
         }
 
     }
 
-    public void driving(Gamepad gamepad1) {
+    public void driveFunc(Gamepad gamepad1) {
 
         // If you press the A button, then you reset the Yaw to be zero from the way the robot is currently pointing
         if (gamepad1.a) {
@@ -49,12 +49,11 @@ public class RobotContainer {
     }
 
     public void shooterFunc(Gamepad gamepad2) {
-
         if (gamepad2.a) {
-            Actions.runBlocking(shooter.fireArtifact());
+            shooter.fireArtifactTeleop();
+        } else {
+            shooter.stopFireArtifact();
         }
-
-
     }
 
 }

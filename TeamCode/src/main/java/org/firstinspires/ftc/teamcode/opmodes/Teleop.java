@@ -19,7 +19,7 @@ public class Teleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            robotContainer.armFunc(gamepad2);
+            robotContainer.collectorFunc(gamepad2);
             robotContainer.driveFunc(gamepad1);
             robotContainer.shooterFunc(gamepad2);
 

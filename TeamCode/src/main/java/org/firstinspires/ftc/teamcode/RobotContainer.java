@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Collector;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
@@ -11,25 +11,24 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class RobotContainer {
 
-    private final Arm arm;
+    private final Collector collector;
     private final Drivetrain drivetrain;
     private final Shooter shooter;
 
     public RobotContainer(HardwareMap hardwareMap) {
-        arm = new Arm(hardwareMap);
+        collector = new Collector(hardwareMap);
         drivetrain = new Drivetrain(hardwareMap);
         shooter = new Shooter(hardwareMap);
 
     }
 
-    public void armFunc(Gamepad gamepad2) {
+    public void collectorFunc(Gamepad gamepad2) {
 
         if (gamepad2.x) {
-            Actions.runBlocking(arm.armPos1000());
-        } else if (gamepad2.b) {
-            Actions.runBlocking(arm.armPos2000());
+            collector.collectArtifactTeleop();
+        } else {
+            collector.stopCollectArtifact();
         }
-
     }
 
     public void driveFunc(Gamepad gamepad1) {

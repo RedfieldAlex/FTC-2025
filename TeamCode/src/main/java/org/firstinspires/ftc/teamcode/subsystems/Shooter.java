@@ -36,11 +36,11 @@ public class Shooter {
         rightShooter.setPower(0);
     }
 
-    public Action fireArtifactAuto() {
-        return new FireArtifactAuto();
+    public Action collectArtifactAuto() {
+        return new CollectArtifactAuto();
     }
 
-    public class FireArtifactAuto implements Action {
+    public class CollectArtifactAuto implements Action {
 
         private boolean initialized = false;
         public ElapsedTime runtime = new ElapsedTime();

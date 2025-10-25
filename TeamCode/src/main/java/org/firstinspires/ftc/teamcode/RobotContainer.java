@@ -2,11 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Collector;
 import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
-import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -14,27 +11,24 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class RobotContainer {
 
-    private final Arm arm;
+    private final Collector collector;
     private final Drivetrain drivetrain;
     private final Shooter shooter;
-    private final Intake intake;
 
     public RobotContainer(HardwareMap hardwareMap) {
-        arm = new Arm(hardwareMap);
+        collector = new Collector(hardwareMap);
         drivetrain = new Drivetrain(hardwareMap);
         shooter = new Shooter(hardwareMap);
-        intake = new Intake(hardwareMap);
 
     }
 
-    public void armFunc(Gamepad gamepad2) {
+    public void collectorFunc(Gamepad gamepad2) {
 
         if (gamepad2.x) {
-            Actions.runBlocking(arm.armPos1000());
-        } else if (gamepad2.b) {
-            Actions.runBlocking(arm.armPos2000());
+            collector.collectArtifactTeleop();
+        } else {
+            collector.stopCollectArtifact();
         }
-
     }
 
     public void driveFunc(Gamepad gamepad1) {
@@ -57,29 +51,8 @@ public class RobotContainer {
         if (gamepad2.a) {
             shooter.fireArtifactTeleop();
         } else {
-            shooter.shooterZeroPower();
+            shooter.stopFireArtifact();
         }
-    }
-
-    public void intakeFunc(Gamepad gamepad2) {
-        if (gamepad2.left_stick_y > 0) {
-            intake.collectArtifactTeleop();
-        } else if (gamepad2.left_stick_y < 0){
-            intake.releaseArtifactTeleop();
-        } else {
-            intake.intakeZeroPower();
-        }
-    }
-
-    public void Telemetry(Telemetry telemetry) {
-
-        telemetry.addData("Arm Position", arm.getArmCurrentPosition());
-        telemetry.addData("Intake Power", intake.getIntakePower());
-        telemetry.addData("Shooter Power", shooter.getLeftShooterPower());
-
-        telemetry.update();
-
-
     }
 
 }

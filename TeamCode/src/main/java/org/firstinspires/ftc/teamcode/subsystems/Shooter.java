@@ -22,12 +22,16 @@ public class Shooter {
         rightShooter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
+    public double getLeftShooterPower() {
+        return leftShooter.getPower();
+    }
+
     public void fireArtifactTeleop() {
         leftShooter.setPower(1.0);
         rightShooter.setPower(1.0);
     }
 
-    public void stopFireArtifact() {
+    public void shooterZeroPower() {
         leftShooter.setPower(0);
         rightShooter.setPower(0);
     }
@@ -52,17 +56,16 @@ public class Shooter {
                 initialized = true;
             }
 
-            double leftShooterPower = leftShooter.getPower();
-            double rightShooterPower = rightShooter.getPower();
+            double getLeftShooterPower = leftShooter.getPower();
+            double getRightShooterPower = rightShooter.getPower();
 
-            packet.put("Left Shooter Power", leftShooterPower);
-            packet.put("Right Shooter Power", rightShooterPower);
+            packet.put("Left Shooter Power", getLeftShooterPower); //send to FTC dashboard
+            packet.put("Right Shooter Power", getRightShooterPower); //send to FTC dashboard
 
             if (runtime.seconds() < SHOOT_TIME) {
                 return true;
             } else {
-                leftShooter.setPower(0);
-                rightShooter.setPower(0);
+                shooterZeroPower();
                 return false;
             }
 

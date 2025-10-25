@@ -18,6 +18,10 @@ public class Arm {
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
+    public int getArmCurrentPosition() {
+        return arm.getCurrentPosition();
+    }
+
     public Action armPos1000() {
         return new ArmPos1000();
     }
@@ -40,7 +44,7 @@ public class Arm {
             }
 
             double pos = arm.getCurrentPosition();
-            packet.put("liftPos", pos);
+            packet.put("ArmPos", pos); //send to FTC dashboard
             if (arm.isBusy()) {
                 return true;
             } else {

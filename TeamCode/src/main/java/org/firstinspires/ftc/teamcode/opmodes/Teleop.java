@@ -1,30 +1,48 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotContainer;
+import org.firstinspires.ftc.teamcode.subsystems.Collector;
+import org.firstinspires.ftc.teamcode.subsystems.Drivetrain;
+import org.firstinspires.ftc.teamcode.subsystems.Shooter;
 
 @TeleOp (name = "Teleop", group = "Robot")
-public class Teleop extends LinearOpMode {
+public class Teleop extends OpMode {
 
-    RobotContainer robotContainer;
+    Collector collector;
+    Drivetrain drivetrain;
+    Shooter shooter;
 
     @Override
-    public void runOpMode() {
+    public void init() {
+        collector = new Collector(this);
+        collector.initCollector();
 
-        robotContainer = new RobotContainer(hardwareMap);
+        drivetrain = new Drivetrain(this);
+        drivetrain.initDrivetrain();
 
-        waitForStart();
+        shooter = new Shooter(this);
+        shooter.initShooter();
+    }
 
-        while (opModeIsActive()) {
+    @Override
+    public void init_loop() {
+        collector.telemetryCollector();
+        drivetrain.telemetryDrivetrain();
+        shooter.telemetryShooter();
+    }
 
-            robotContainer.collectorFunc(gamepad2);
-            robotContainer.driveFunc(gamepad1);
-            robotContainer.shooterFunc(gamepad2);
+    @Override
+    public void loop() {
+        collector.collectorFunc();
+        collector.telemetryCollector();
 
-        }
+        drivetrain.drivetrainFunc();
+        drivetrain.telemetryDrivetrain();
 
+        shooter.shooterFunc();
+        shooter.telemetryShooter();
     }
 
 }

@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
-import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -19,21 +17,13 @@ public class Auto extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        collector = new Collector(hardwareMap);
-        drivetrain = new Drivetrain(hardwareMap);
-        shooter = new Shooter(hardwareMap);
-
+        collector = new Collector(this);
+        drivetrain = new Drivetrain(this);
+        shooter = new Shooter(this);
 
         waitForStart();
 
-        Actions.runBlocking(new SequentialAction(
 
-
-
-
-
-
-        ));
     }
 
 
